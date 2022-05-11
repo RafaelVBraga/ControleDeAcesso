@@ -47,5 +47,12 @@ public class AutorizacaoController {
 		return autoService.editAutorizacao(autorizacao);
 		
 	}
+	@PutMapping("{id}/status/{status}")
+	public Autorizacao setStatus(@PathVariable("id")UUID id,@PathVariable("status") String status) {
+		Optional<Autorizacao> autoResp = autoService.findById(id);
+		Autorizacao autorizacao = (autoResp.isPresent()?autoResp.get():new Autorizacao());
+		autorizacao.setStatus(status);
+		return autoService.editAutorizacao(autorizacao);
+	}
 
 }
