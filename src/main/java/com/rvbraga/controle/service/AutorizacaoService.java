@@ -31,4 +31,9 @@ public class AutorizacaoService {
 	public List<Optional<Autorizacao>> findByInstalacao(String instalacao){
 		return autoRepo.findByInstalacao(instalacao);
 	}
+	
+	public List<Autorizacao> findAll(){
+		return autoRepo.findAll();
+				
+	}
 }
