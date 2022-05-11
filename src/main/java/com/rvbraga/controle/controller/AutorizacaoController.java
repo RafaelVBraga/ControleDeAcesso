@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rvbraga.controle.model.Autorizacao;
 import com.rvbraga.controle.model.Funcionario;
 import com.rvbraga.controle.service.AutorizacaoService;
+import com.rvbraga.controle.service.FuncionarioService;
 
 @RestController
 @CrossOrigin
@@ -25,6 +26,9 @@ public class AutorizacaoController {
 	
 	@Autowired
 	private AutorizacaoService autoService;
+	
+	@Autowired
+	private FuncionarioService funcService;
 	
 	@PostMapping("")
 	public Autorizacao save(@RequestBody Autorizacao autorizacao) {
@@ -47,6 +51,11 @@ public class AutorizacaoController {
 		return autoService.editAutorizacao(autorizacao);
 		
 	}
+	@PutMapping("{id}/funcionario/delete/{idFunc}")
+	public Autorizacao deleteFuncionario(@PathVariable("id")UUID id, @PathVariable("idFunc")UUID idFunc) {
+		
+	}
+	
 	@PutMapping("{id}/status/{status}")
 	public Autorizacao setStatus(@PathVariable("id")UUID id,@PathVariable("status") String status) {
 		Optional<Autorizacao> autoResp = autoService.findById(id);
