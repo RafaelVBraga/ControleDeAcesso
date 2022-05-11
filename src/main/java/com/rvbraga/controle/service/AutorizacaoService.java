@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rvbraga.controle.model.Autorizacao;
+import com.rvbraga.controle.model.Funcionario;
 import com.rvbraga.controle.repository.AutorizacaoRepository;
 
 @Service
@@ -35,5 +36,8 @@ public class AutorizacaoService {
 	public List<Autorizacao> findAll(){
 		return autoRepo.findAll();
 				
+	}
+	public List<Funcionario> findFuncionarios(UUID id){
+		return autoRepo.findFuncionariosFromAutorizacao(id);
 	}
 }
