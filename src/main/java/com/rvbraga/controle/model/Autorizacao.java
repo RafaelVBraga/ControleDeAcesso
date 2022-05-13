@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 
@@ -30,7 +32,7 @@ public class Autorizacao implements Serializable{
 	private String data;
 	private String hora;
 	private String status;	
-	@ManyToMany(mappedBy = "autorizacoes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "autorizacoes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
 	private Set<Funcionario> funcionarios;  
 	
 	public void addFuncionario(Funcionario func) {

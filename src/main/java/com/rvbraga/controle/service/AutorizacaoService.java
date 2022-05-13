@@ -1,5 +1,6 @@
 package com.rvbraga.controle.service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -30,15 +31,19 @@ public class AutorizacaoService {
 	}
 	
 	public Set<Optional<Autorizacao>> findByInstalacao(String instalacao){
-		return autoRepo.findByInstalacao(instalacao);
+		Set<Optional<Autorizacao>> set = new HashSet<Optional<Autorizacao>>(autoRepo.findByInstalacao(instalacao));
+		return set ;
+				
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Set<Autorizacao> findAll(){
-		return (Set<Autorizacao>) autoRepo.findAll();
+		Set<Autorizacao> set = new HashSet<Autorizacao>(autoRepo.findAll());
+		return set ;
 				
 	}
 	public Set<Funcionario> findFuncionarios(UUID id){
-		return autoRepo.findFuncionariosFromAutorizacao(id);
+		Set<Funcionario> set = new HashSet<Funcionario>(autoRepo.findFuncionariosFromAutorizacao(id));
+		return set ;
+		
 	}
 }
