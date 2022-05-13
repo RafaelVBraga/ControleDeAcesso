@@ -46,4 +46,8 @@ public class AutorizacaoService {
 		return set ;
 		
 	}
+	
+	public Autorizacao addFuncionario(UUID id, Funcionario func) {
+		
+	}
 }

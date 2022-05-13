@@ -1,5 +1,6 @@
 package com.rvbraga.controle.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -31,7 +32,8 @@ public class FuncionarioService {
 	}
 	@SuppressWarnings("unchecked")
 	public Set<Funcionario> findAll(){
-		 return (Set<Funcionario>) funcRepo.findAll();
+		Set<Funcionario> set = new HashSet<Funcionario>(funcRepo.findAll());
+		return set;
 	}
 	
 	@SuppressWarnings("unchecked")
