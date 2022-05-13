@@ -1,33 +1,51 @@
 package com.rvbraga.controle.model;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
-@Data	
+@Data
 @Entity
-public class Funcionario implements Serializable{
+public class Funcionario implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	private String nome;
 	private String cpf;
 	private String empresa;
-	@ManyToOne
-	@JsonIgnore
-	private Autorizacao autorizacao;
 
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "AUTORIZACAO_FUNCIONARIO", joinColumns = {
+			@JoinColumn(name = "Autorizacao_ID") }, inverseJoinColumns = { @JoinColumn(name = "Funcionario_ID") })
+	@JsonIgnore
+	private Set<Autorizacao> autorizacoes;
+	
+	public void addAutorizacao(Autorizacao auto) {
+		this.autorizacoes.add(auto);
+		auto.getFuncionarios().add(this);
+	}
+	public void removeAutorizacao(Autorizacao auto) {
+		this.autorizacoes.remove(auto);
+		auto.getFuncionarios().remove(this);
+
+	}
 }

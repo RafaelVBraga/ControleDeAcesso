@@ -38,22 +38,28 @@ public class AutorizacaoController {
 	public Optional<Autorizacao> findById(@PathVariable("id")UUID id) {
 		return autoService.findById(id);
 	}
+	@SuppressWarnings("unchecked")
 	@GetMapping("{id}/funcionarios")
 	public List<Funcionario> getFuncionarios(@PathVariable("id") UUID id){
-		return autoService.findFuncionarios(id);		
+		return (List<Funcionario>) autoService.findFuncionarios(id);		
 	}
 	
 	@PutMapping("{id}/funcionario")
 	public Autorizacao addFuncionario(@PathVariable("id")UUID id, @RequestBody Funcionario func) {
 		Optional<Autorizacao> autoResp = autoService.findById(id);
 		Autorizacao autorizacao = (autoResp.isPresent()?autoResp.get():new Autorizacao());		
-		autorizacao.getFuncionarios().add(func);
+		autorizacao.addFuncionario(func);
 		return autoService.editAutorizacao(autorizacao);
 		
 	}
 	@PutMapping("{id}/funcionario/delete/{idFunc}")
 	public Autorizacao deleteFuncionario(@PathVariable("id")UUID id, @PathVariable("idFunc")UUID idFunc) {
-		
+			Autorizacao aut = autoService.findById(id).get();
+			Funcionario func = funcService.findById(idFunc).get();
+			func.removeAutorizacao(aut);			
+			funcService.edit(func);
+			return autoService.editAutorizacao(aut);
+			
 	}
 	
 	@PutMapping("{id}/status/{status}")

@@ -2,6 +2,7 @@ package com.rvbraga.controle.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class FuncionarioController {
 	private FuncionarioService service; 
 	
 	@GetMapping("funcionario/nome/{funcNome}")
-	public ResponseEntity<List<Optional<Funcionario>>> funcionarioByNome(@PathVariable("funcNome")String funcNome) {
+	public ResponseEntity<Set<Optional<Funcionario>>> funcionarioByNome(@PathVariable("funcNome")String funcNome) {
 		
-		List<Optional<Funcionario>> response = service.findByNome(funcNome);		
+		Set<Optional<Funcionario>> response = service.findByNome(funcNome);		
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	@GetMapping("funcionario/id/{funcNome}")
@@ -47,12 +48,12 @@ public class FuncionarioController {
 		return ResponseEntity.status(HttpStatus.OK).body(response.isPresent()?response.get(): null);
 	}
 	@GetMapping("funcionario")
-	public ResponseEntity<List<Funcionario>> findAll(){
+	public ResponseEntity<Set<Funcionario>> findAll(){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
 	}
 	@GetMapping("funcionario/empresa/{empresa}")
-	public  ResponseEntity<List<Funcionario>> findByEmpresa(@PathVariable("empresa")String empresa){
+	public  ResponseEntity<Set<Funcionario>> findByEmpresa(@PathVariable("empresa")String empresa){
 		return ResponseEntity.status(HttpStatus.OK).body(service.findByEmpresa(empresa));
 	}
 	@PostMapping("funcionario")

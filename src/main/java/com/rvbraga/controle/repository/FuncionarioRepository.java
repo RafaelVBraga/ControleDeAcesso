@@ -16,8 +16,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, UUID> 
 	
 	@Query("select f from Funcionario f where lower(f.empresa) like %:empresa%")
 	List<Funcionario> findByEmpresa(@Param("empresa")String empresa);
-	@Query("select f from Funcionario f where f.autorizacao like %:autorizacao% ")
-	List<Funcionario> findByAutorizacao(@Param("autorizacao")String autorizacao);
+	
 	@Query("select f from Funcionario f where lower(f.nome) like %:nome% ")
 	List<Optional<Funcionario>> findByNome(@Param("nome")String nome);	
 	Optional<Funcionario> findByCpf(String cpf);

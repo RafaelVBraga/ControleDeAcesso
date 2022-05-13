@@ -1,7 +1,7 @@
 package com.rvbraga.controle.service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +29,16 @@ public class AutorizacaoService {
 		return autoRepo.findById(id);
 	}
 	
-	public List<Optional<Autorizacao>> findByInstalacao(String instalacao){
+	public Set<Optional<Autorizacao>> findByInstalacao(String instalacao){
 		return autoRepo.findByInstalacao(instalacao);
 	}
 	
-	public List<Autorizacao> findAll(){
-		return autoRepo.findAll();
+	@SuppressWarnings("unchecked")
+	public Set<Autorizacao> findAll(){
+		return (Set<Autorizacao>) autoRepo.findAll();
 				
 	}
-	public List<Funcionario> findFuncionarios(UUID id){
+	public Set<Funcionario> findFuncionarios(UUID id){
 		return autoRepo.findFuncionariosFromAutorizacao(id);
 	}
 }

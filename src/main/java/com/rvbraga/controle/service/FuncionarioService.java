@@ -2,6 +2,7 @@ package com.rvbraga.controle.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,9 @@ public class FuncionarioService {
 	@Autowired
 	private FuncionarioRepository funcRepo;
 	
-	public List<Optional<Funcionario>> findByNome(String nome){
-		return funcRepo.findByNome(nome);
+	@SuppressWarnings("unchecked")
+	public Set<Optional<Funcionario>> findByNome(String nome){
+		return (Set<Optional<Funcionario>>) funcRepo.findByNome(nome);
 	}
 	public Optional<Funcionario> findByCpf(String cpf){
 		return funcRepo.findByCpf(cpf);
@@ -27,17 +29,16 @@ public class FuncionarioService {
 		
 		return funcRepo.findById(id);
 	}
-	public List<Funcionario> findAll(){
-		 return funcRepo.findAll();
+	@SuppressWarnings("unchecked")
+	public Set<Funcionario> findAll(){
+		 return (Set<Funcionario>) funcRepo.findAll();
 	}
 	
-	public List<Funcionario> findByEmpresa(String Empresa){
-		 return funcRepo.findByEmpresa(Empresa);
+	@SuppressWarnings("unchecked")
+	public Set<Funcionario> findByEmpresa(String Empresa){
+		 return (Set<Funcionario>) funcRepo.findByEmpresa(Empresa);
 	}
 	 
-	public List<Funcionario> findByAutorizacao(String autorizacao){
-		 return funcRepo.findByAutorizacao(autorizacao);
-	}
 	
 	public Funcionario save(Funcionario func) {
 		return funcRepo.save(func);
@@ -47,8 +48,9 @@ public class FuncionarioService {
 		return funcRepo.saveAndFlush(func);
 	}
 	
-	public List<Funcionario> saveAll(List<Funcionario> funcs){
-		return funcRepo.saveAll(funcs);
+	@SuppressWarnings("unchecked")
+	public Set<Funcionario> saveAll(List<Funcionario> funcs){
+		return (Set<Funcionario>) funcRepo.saveAll(funcs);
 	}
 	
 	public void delete(UUID id) {
