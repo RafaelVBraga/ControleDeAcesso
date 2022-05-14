@@ -28,9 +28,6 @@ public class AutorizacaoController {
 	@Autowired
 	private AutorizacaoService autoService;
 	
-	@Autowired
-	private FuncionarioService funcService;
-	
 	@GetMapping("")
 	public Set<Autorizacao> findAll(){
 		return autoService.findAll();		}
@@ -51,29 +48,19 @@ public class AutorizacaoController {
 	}
 	
 	@PutMapping("/{id}/funcionario")
-	public Autorizacao addFuncionario(@PathVariable("id")UUID id, @RequestBody Funcionario func) {
-		Optional<Autorizacao> autoResp = autoService.findById(id);
-		Autorizacao autorizacao = (autoResp.isPresent()?autoResp.get():new Autorizacao());		
-		autorizacao.addFuncionario(func);
-		return autoService.editAutorizacao(autorizacao);
+	public Autorizacao addFuncionario(@PathVariable("id")UUID id, @RequestBody Funcionario func) {		
+		return autoService.addFuncionario(id, func);
 		
 	}
 	@PutMapping("/{id}/funcionario/delete/{idFunc}")
-	public Autorizacao deleteFuncionario(@PathVariable("id")UUID id, @PathVariable("idFunc")UUID idFunc) {
-			Autorizacao aut = autoService.findById(id).get();
-			Funcionario func = funcService.findById(idFunc).get();
-			func.removeAutorizacao(aut);			
-			funcService.edit(func);
-			return autoService.editAutorizacao(aut);
+	public Autorizacao deleteFuncionario(@PathVariable("id")UUID id, @PathVariable("idFunc")UUID idFunc) {			
+			return autoService.deleteFuncionario(id, idFunc);
 			
 	}
 	
 	@PutMapping("/{id}/status/{status}")
-	public Autorizacao setStatus(@PathVariable("id")UUID id,@PathVariable("status") String status) {
-		Optional<Autorizacao> autoResp = autoService.findById(id);
-		Autorizacao autorizacao = (autoResp.isPresent()?autoResp.get():new Autorizacao());
-		autorizacao.setStatus(status);
-		return autoService.editAutorizacao(autorizacao);
+	public Autorizacao setStatus(@PathVariable("id")UUID id,@PathVariable("status") String status) {	
+		return autoService.setStatus(id, status);
 	}
 
 }
