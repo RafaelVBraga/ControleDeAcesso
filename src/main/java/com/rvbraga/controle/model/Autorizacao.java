@@ -14,9 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 
 @Entity
@@ -34,6 +34,8 @@ public class Autorizacao implements Serializable{
 	private String data;
 	private String hora;
 	private String status;	
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
 	@JoinTable(name = "AUTORIZACAO_FUNCIONARIO", joinColumns = {
 			@JoinColumn(name = "Autorizacao_ID") }, inverseJoinColumns = { @JoinColumn(name = "Funcionario_ID") })

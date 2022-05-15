@@ -33,7 +33,7 @@ public class Funcionario implements Serializable {
 	private String cpf;
 	private String empresa;
 
-	@ManyToMany(mappedBy="funcionarios",cascade = CascadeType.ALL)	
+	@ManyToMany(mappedBy="funcionarios")	
 	@JsonIgnore
 	private Set<Autorizacao> autorizacoes;
 	
