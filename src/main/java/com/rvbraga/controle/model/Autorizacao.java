@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,7 +34,9 @@ public class Autorizacao implements Serializable{
 	private String data;
 	private String hora;
 	private String status;	
-	@ManyToMany(mappedBy = "autorizacoes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	@JoinTable(name = "AUTORIZACAO_FUNCIONARIO", joinColumns = {
+			@JoinColumn(name = "Autorizacao_ID") }, inverseJoinColumns = { @JoinColumn(name = "Funcionario_ID") })
 	private Set<Funcionario> funcionarios;  
 	
 	public void addFuncionario(Funcionario func) {

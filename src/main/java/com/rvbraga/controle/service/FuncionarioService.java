@@ -30,7 +30,6 @@ public class FuncionarioService {
 		
 		return funcRepo.findById(id);
 	}
-	@SuppressWarnings("unchecked")
 	public Set<Funcionario> findAll(){
 		Set<Funcionario> set = new HashSet<Funcionario>(funcRepo.findAll());
 		return set;

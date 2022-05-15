@@ -33,8 +33,7 @@ public class AutorizacaoController {
 		return autoService.findAll();		}
 	
 	@PostMapping("")
-	public Autorizacao save(@RequestBody Autorizacao autorizacao) {
-		System.out.println("save function!");
+	public Autorizacao save(@RequestBody Autorizacao autorizacao) {		
 		return autoService.saveAutorizacao(autorizacao);
 	}
 	@GetMapping("/{id}")

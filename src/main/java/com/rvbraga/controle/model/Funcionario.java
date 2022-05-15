@@ -33,9 +33,7 @@ public class Funcionario implements Serializable {
 	private String cpf;
 	private String empresa;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "AUTORIZACAO_FUNCIONARIO", joinColumns = {
-			@JoinColumn(name = "Autorizacao_ID") }, inverseJoinColumns = { @JoinColumn(name = "Funcionario_ID") })
+	@ManyToMany(mappedBy="funcionarios",cascade = CascadeType.ALL)	
 	@JsonIgnore
 	private Set<Autorizacao> autorizacoes;
 	
