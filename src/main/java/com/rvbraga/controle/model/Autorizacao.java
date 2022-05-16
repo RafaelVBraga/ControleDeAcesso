@@ -1,6 +1,7 @@
 package com.rvbraga.controle.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -42,8 +43,16 @@ public class Autorizacao implements Serializable{
 	private Set<Funcionario> funcionarios;  
 	
 	public void addFuncionario(Funcionario func) {
-		this.funcionarios.add(func);
-		func.getAutorizacoes().add(this);
+		
+		try {
+			func.getAutorizacoes().add(this);
+		}catch(NullPointerException exc) {
+			HashSet<Autorizacao> setOfAuth = new HashSet<Autorizacao>();
+			func.setAutorizacoes(setOfAuth);
+			func.getAutorizacoes().add(this);
+		}finally {
+			this.funcionarios.add(func);
+		}
 	}
 	public void deleteFuncionario(final Funcionario func) {
 		this.funcionarios.remove(func);
