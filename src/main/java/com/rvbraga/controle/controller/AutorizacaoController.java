@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rvbraga.controle.model.Autorizacao;
 import com.rvbraga.controle.model.Funcionario;
 import com.rvbraga.controle.service.AutorizacaoService;
-import com.rvbraga.controle.service.FuncionarioService;
 
 @RestController
 @CrossOrigin
