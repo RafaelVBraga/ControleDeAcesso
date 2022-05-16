@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,7 @@ public class AutorizacaoController {
 		return autoService.addFuncionario(id, func);
 		
 	}
-	@PutMapping("/{id}/funcionario/delete/{idFunc}")
+	@DeleteMapping("/{id}/funcionario/delete/{idFunc}")
 	public Autorizacao deleteFuncionario(@PathVariable("id")UUID id, @PathVariable("idFunc")UUID idFunc) {			
 			return autoService.deleteFuncionario(id, idFunc);
 			
